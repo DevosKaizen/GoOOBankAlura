@@ -1,0 +1,53 @@
+Olá! O erro que você está enfrentando ocorre porque a declaração do tipo ContaCorrente e do método Sacar estão fora do escopo da função banco.
+
+Para corrigir esse erro, você precisa mover a declaração do tipo ContaCorrente e do método Sacar para fora da função banco, de modo que eles sejam acessíveis em todo o pacote.
+
+Além disso, você precisa inicializar a variável contaDaSilvia corretamente, usando a sintaxe &ContaCorrente{} em vez de new(ContaCorrente).
+
+Aqui está o código corrigido:
+
+go
+Copiar código
+package main
+
+import "fmt"
+
+type ContaCorrente struct {
+    titular       string
+    numeroAgencia int
+    numeroConta   int
+    saldo         float64
+}
+
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+    podeSacar := valorDoSaque <= c.saldo
+    if podeSacar {
+        c.saldo -= valorDoSaque
+        return "Saque realizado com sucesso! "
+    } else {
+        return "Saldo insuficiente! "
+    }
+}
+
+func main() {
+    fmt.Println()
+    banco()
+}
+
+func banco() {
+    contaDoGuilherme := ContaCorrente{titular: "Guilherme", numeroAgencia: 5473, numeroConta: 326545, saldo: 200}
+    fmt.Println(contaDoGuilherme)
+
+    contaDaCris := new(ContaCorrente)
+    fmt.Println(contaDaCris)
+
+    contaDaSilvia := &ContaCorrente{}
+    contaDaSilvia.titular = "Silvia"
+    contaDaSilvia.saldo = 500
+    fmt.Println(contaDaSilvia)
+
+    valorDoSaque := 200.0
+    fmt.Println("O valor do saque é: ", valorDoSaque)
+    fmt.Println(contaDaSilvia.Sacar(valorDoSaque))
+}
+Agora o código deve funcionar corretamente. Espero ter ajudado! Se tiver mais alguma dúvida, é só me perguntar.

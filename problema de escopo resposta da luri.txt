@@ -51,3 +51,6 @@ func banco() {
     fmt.Println(contaDaSilvia.Sacar(valorDoSaque))
 }
 Agora o código deve funcionar corretamente. Espero ter ajudado! Se tiver mais alguma dúvida, é só me perguntar.
+
+
+depois de tudo certo e resolvido

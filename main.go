@@ -5,6 +5,16 @@ import (
 	"fmt"
 )
 
+func PagarBoleto(conta verificarConta, valorDoBoleto float64) {
+
+	conta.Sacar(valorDoBoleto)
+
+}
+
+type verificarConta interface {
+	Sacar(valor float64) string
+}
+
 func main() {
 
 	fmt.Println()
@@ -28,7 +38,6 @@ func main() {
 	// fmt.Println("o novo Saldo do Gustavo é", contaDoGustavo.Saldo)
 	// fmt.Println("o novo Saldo da Silvia é", contaDaSilvia.Saldo)
 
-
 	// clienteBruno := clientes.Titular{"Bruno","823.765.400-00", "Dev"}
 	// contaDoBruno := contas.ContaCorrente{clienteBruno, 250, 320005, 100}
 	// fmt.Println(clienteBruno)
@@ -40,14 +49,18 @@ func main() {
 	// fmt.Println(clienteExemplo)
 	// fmt.Println(contaExemplo.ObterSaldo())
 
-	
-
 	contaDoDenis := contas.ContaPoupanca{}
 	fmt.Println(contaDoDenis)
-	contaDoDenis.Depositar(100)
+	contaDoDenis.Depositar(1000)
+	print("Saldo atual é: ")
 	fmt.Println(contaDoDenis.ObterSaldo())
-	
+
 	contaDoDenis.Sacar(54)
+	print("Saldo atual é: ")
+	fmt.Println(contaDoDenis.ObterSaldo())
+
+	PagarBoleto(&contaDoDenis, 60)
+	print("Saldo atual é: ")
 	fmt.Println(contaDoDenis.ObterSaldo())
 
 }
